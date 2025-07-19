@@ -1,0 +1,6 @@
+@dotnet_microservices_boilerplate_HostAddress = http://localhost:5167
+
+GET {{dotnet_microservices_boilerplate_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
