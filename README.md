@@ -36,7 +36,9 @@ flowchart LR
         MediatR -->|Invoke| Domain
         Domain -->|Events| KafkaBroker(Kafka)
         Domain -->|Repos| Infrastructure
-        ReadModel[Read Model<br/>(Redis + View DB)]
+        ReadModel["Read Model<br/>(Redis + View DB)"]
     end
     Infrastructure -->|EF Core| PostgreSQL[(PostgreSQL)]
     ReadModel --> API
+
+```
