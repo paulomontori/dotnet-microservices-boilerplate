@@ -46,6 +46,7 @@ The application now uses **Redis** for caching query results. A view database is
 
 ### Observability Layer
 **Serilog** handles structured logging while **OpenTelemetry** collects traces and metrics. Metrics are exposed at `/metrics` for Prometheus and can be visualized in **Grafana**.
+Global exception handling with structured logs is provided via `ErrorHandlingMiddleware`, and MediatR requests are logged through a `LoggingBehavior`.
 
 ## 🚀 Docker & AKS Deployment
 
