@@ -66,3 +66,5 @@ kubectl apply -f k8s/service.yaml
 ```
 
 This creates a Deployment and an external Service for the API.
+
+```
