@@ -64,7 +64,3 @@ an AKS cluster:
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 ```
-
-This creates a Deployment and an external Service for the API.
-
-```
