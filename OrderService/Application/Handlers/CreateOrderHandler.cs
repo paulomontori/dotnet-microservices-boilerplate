@@ -1,12 +1,21 @@
 using MediatR;
 using dotnet_microservices_boilerplate.OrderService.Application.Commands;
+using dotnet_microservices_boilerplate.OrderService.Domain.Brokers;
 using dotnet_microservices_boilerplate.OrderService.Domain.Entities;
+using dotnet_microservices_boilerplate.OrderService.Domain.Events;
 
 namespace dotnet_microservices_boilerplate.OrderService.Application.Handlers;
 
 public sealed class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Guid>
 {
-    public Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+    private readonly IKafkaBroker _kafkaBroker;
+
+    public CreateOrderHandler(IKafkaBroker kafkaBroker)
+    {
+        _kafkaBroker = kafkaBroker;
+    }
+
+    public async Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         // For demo purposes simply generate a new order id
         var order = new Order { Id = Guid.NewGuid() };
@@ -20,6 +29,11 @@ public sealed class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Gui
             });
         }
         // In a real application the order would be persisted using a repository
-        return Task.FromResult(order.Id);
+
+        // Publish event to Kafka
+        var evt = new OrderCreatedEvent(order.Id, DateTime.UtcNow);
+        await _kafkaBroker.ProduceAsync("orders", evt, cancellationToken);
+
+        return order.Id;
     }
 }

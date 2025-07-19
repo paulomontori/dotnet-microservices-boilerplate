@@ -1,11 +1,16 @@
 var builder = WebApplication.CreateBuilder(args);
 
+using dotnet_microservices_boilerplate.OrderService.Domain.Brokers;
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblyContaining<dotnet_microservices_boilerplate.OrderService.Application.Commands.CreateOrderCommand>());
+
+var kafkaBootstrap = builder.Configuration.GetValue<string>("Kafka:BootstrapServers") ?? "localhost:9092";
+builder.Services.AddSingleton<IKafkaBroker>(_ => new KafkaBroker(kafkaBootstrap));
 
 var app = builder.Build();
 
