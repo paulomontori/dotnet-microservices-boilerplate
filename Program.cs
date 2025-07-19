@@ -37,7 +37,7 @@ builder.Services.AddDbContext<OrderDbContext>(options =>
 builder.Services.AddScoped<OrderRepository>();
 builder.Services.AddStackExchangeRedisCache(options =>
     options.Configuration = builder.Configuration.GetConnectionString("Redis") ?? "localhost:6379");
-builder.Services.AddScoped<OrderViewRepository>();
+builder.Services.AddScoped<IOrderViewRepository, OrderViewRepository>();
 
 builder.Services.AddOpenTelemetry()
     .WithTracing(tracing =>

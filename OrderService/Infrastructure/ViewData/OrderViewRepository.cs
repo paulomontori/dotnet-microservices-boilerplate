@@ -6,7 +6,13 @@ using dotnet_microservices_boilerplate.OrderService.Infrastructure.Data;
 
 namespace dotnet_microservices_boilerplate.OrderService.Infrastructure.ViewData;
 
-public sealed class OrderViewRepository
+public interface IOrderViewRepository
+{
+    Task<Order?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<Order>> ListAsync(string? status, int page, int pageSize, CancellationToken cancellationToken = default);
+}
+
+public sealed class OrderViewRepository : IOrderViewRepository
 {
     private readonly OrderDbContext _dbContext;
     private readonly IDistributedCache _cache;
