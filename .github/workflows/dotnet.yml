@@ -28,7 +28,10 @@ jobs:
 
       - name: Test with coverage
         run: dotnet test --no-build --verbosity normal --configuration Release --collect:"XPlat Code Coverage" --logger trx
-
+        
+      - name: Install ReportGenerator
+        run: dotnet add package ReportGenerator --version 5.4.9
+        
       - name: Generate report
         run: dotnet $(UserProfile)\.nuget\packages\reportgenerator\5.4.9\tools\net8.0\ReportGenerator.dll -reports:cobertura.xml -targetdir:coverage-report
 
