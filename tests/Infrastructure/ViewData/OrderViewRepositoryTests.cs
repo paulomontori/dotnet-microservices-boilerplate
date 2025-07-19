@@ -7,6 +7,8 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Xunit;
+using System;
+using System.Threading.Tasks;
 
 public class OrderViewRepositoryTests
 {

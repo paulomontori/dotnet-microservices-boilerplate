@@ -6,11 +6,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Xunit;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using System;
 
 public class ErrorHandlingMiddlewareTests
 {
     [Fact]
-    public async Task Invoke_Should_Return_NotFound_For_KeyNotFoundException()
+    public async System.Threading.Tasks.Task Invoke_Should_Return_NotFound_For_KeyNotFoundException()
     {
         var logger = Substitute.For<ILogger<ErrorHandlingMiddleware>>();
         var middleware = new ErrorHandlingMiddleware(ctx => throw new KeyNotFoundException("missing"), logger);

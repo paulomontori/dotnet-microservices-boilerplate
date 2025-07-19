@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Xunit;
+using System;
+using System.Threading.Tasks;
 
 public class OrderRepositoryTests
 {

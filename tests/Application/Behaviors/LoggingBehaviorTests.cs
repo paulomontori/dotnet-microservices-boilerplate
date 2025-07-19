@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Xunit;
+using System;
 
 public class LoggingBehaviorTests
 {

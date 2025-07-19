@@ -1,4 +1,3 @@
-using PWorx.MicroserviceBoilerPlate.OrderService.Application.Dtos;
 using PWorx.MicroserviceBoilerPlate.OrderService.Application.Handlers;
 using PWorx.MicroserviceBoilerPlate.OrderService.Application.Queries;
 using PWorx.MicroserviceBoilerPlate.OrderService.Domain.Entities;
@@ -7,6 +6,10 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Xunit;
+using System.Threading.Tasks;
+using System;
+using System.Threading;
+using System.Collections.Generic;
 
 public class GetOrderByIdHandlerTests
 {
