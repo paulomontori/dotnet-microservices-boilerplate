@@ -30,7 +30,7 @@ public class GetOrderByIdHandlerTests
     }
 
     [Test]
-    public async Task Handle_Should_Throw_When_Not_Found()
+    public void Handle_Should_Throw_When_Not_Found()
     {
         var repo = Substitute.For<IOrderViewRepository>();
         var logger = Substitute.For<ILogger<GetOrderByIdHandler>>();
