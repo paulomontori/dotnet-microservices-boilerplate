@@ -41,3 +41,4 @@ flowchart LR
     Infrastructure -->|EF Core| PostgreSQL[(PostgreSQL)]
     ReadModel --> API
 \n### Caching Layer\nThe application now uses **Redis** for caching query results. A view database is accessed via EF Core to serve read models, and cached entries expire after a short period to keep data fresh.
+\n### Observability Layer\n**Serilog** handles structured logging while **OpenTelemetry** collects traces and metrics. Metrics are exposed at `/metrics` for Prometheus and can be visualized in **Grafana**.
