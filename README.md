@@ -1,0 +1,42 @@
+# dotnet‑microservices‑boilerplate
+
+A **reference implementation** of a lightweight Order Management System that showcases:
+
+* **Domain‑Driven Design (DDD)** – clear separation of Bounded Contexts, rich domain model, Value Objects & Aggregates.  
+* **CQRS + Mediator** – commands (write) and queries (read) handled by MediatR to keep intent explicit and side‑effects isolated.  
+* **SOLID principles** – single‑responsibility, dependency inversion via DI, open/closed domain services, etc.
+
+> **Why this project?**  
+> Recruiters and peers can dig into real code that demonstrates clean architecture, scalable patterns and production‑ready practices in a bite‑sized repo.
+
+---
+
+## ⚙️ Tech Stack
+
+| Layer | Tech | Notes |
+|-------|------|-------|
+| API & Hosting | **ASP.NET Core 9 Web API** | Minimal APIs with Swagger & versioning |
+| Mediator / CQRS | **MediatR** | Commands, Queries, Notifications |
+| Persistence | **PostgreSQL** + **EF Core** | DbContext per Bounded Context, Code‑First Migrations |
+| Messaging (async) | **Kafka** (via Confluent.Kafka) | Event publishing for Order domain events |
+| Caching | **Redis** | Read‑model caching, idempotency tokens |
+| Container & Orchestration | **Docker** & **Azure AKS** | Compose for local dev, Helm chart for AKS |
+| Observability | **Serilog**, **OpenTelemetry**, **Prometheus + Grafana** | Structured logs, traces & metrics |
+| Tests | **xUnit**, **FluentAssertions**, **NSubstitute** | Unit, integration & contract tests |
+
+---
+
+## 🏗️ Architecture at a Glance
+
+```mermaid
+flowchart LR
+    subgraph Order Bounded Context
+        API[API Layer<br/>Minimal Endpoints] -->|DTO↔Domain| Application
+        Application -->|Commands/Queries| MediatR
+        MediatR -->|Invoke| Domain
+        Domain -->|Events| KafkaBroker(Kafka)
+        Domain -->|Repos| Infrastructure
+        ReadModel[Read Model<br/>(Redis + View DB)]
+    end
+    Infrastructure -->|EF Core| PostgreSQL[(PostgreSQL)]
+    ReadModel --> API
