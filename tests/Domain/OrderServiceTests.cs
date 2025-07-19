@@ -2,12 +2,12 @@ using System.Threading.Tasks;
 using PWorx.MicroserviceBoilerPlate.Domain;
 using FluentAssertions;
 using NSubstitute;
-using Xunit;
+using NUnit.Framework;
 using System;
 
 public class OrderServiceTests
 {
-    [Fact]
+    [Test]
     public async Task CreateOrderAsync_Should_Save_And_Publish()
     {
         var repo = Substitute.For<IOrderRepository>();
@@ -21,7 +21,7 @@ public class OrderServiceTests
         await producer.Received().PublishAsync(Arg.Any<string>());
     }
 
-    [Fact]
+    [Test]
     public async Task GetOrderAsync_Should_Return_Order_And_Publish()
     {
         var repo = Substitute.For<IOrderRepository>();

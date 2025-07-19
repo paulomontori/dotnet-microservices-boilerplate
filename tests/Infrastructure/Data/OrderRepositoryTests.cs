@@ -4,7 +4,7 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using Xunit;
+using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 
@@ -18,7 +18,7 @@ public class OrderRepositoryTests
         return new OrderDbContext(options);
     }
 
-    [Fact]
+    [Test]
     public async Task SaveAsync_Should_Add_New_Order()
     {
         var context = CreateContext();
@@ -32,7 +32,7 @@ public class OrderRepositoryTests
         saved.Should().NotBeNull();
     }
 
-    [Fact]
+    [Test]
     public async Task GetAsync_Should_Return_Order()
     {
         var context = CreateContext();
