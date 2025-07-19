@@ -2,7 +2,12 @@ using Confluent.Kafka;
 
 namespace dotnet_microservices_boilerplate.Domain;
 
-public class KafkaProducer
+public interface IKafkaProducer
+{
+    Task PublishAsync(string message);
+}
+
+public class KafkaProducer : IKafkaProducer
 {
     private readonly IProducer<Null, string> _producer;
     private readonly string _topic;

@@ -8,10 +8,10 @@ namespace dotnet_microservices_boilerplate.OrderService.Application.Handlers;
 
 public sealed class GetOrderByIdHandler : IRequestHandler<GetOrderByIdQuery, OrderDto>
 {
-    private readonly OrderViewRepository _repository;
+    private readonly IOrderViewRepository _repository;
     private readonly ILogger<GetOrderByIdHandler> _logger;
 
-    public GetOrderByIdHandler(OrderViewRepository repository, ILogger<GetOrderByIdHandler> logger)
+    public GetOrderByIdHandler(IOrderViewRepository repository, ILogger<GetOrderByIdHandler> logger)
     {
         _repository = repository;
         _logger = logger;

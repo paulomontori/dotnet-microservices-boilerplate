@@ -8,10 +8,10 @@ namespace dotnet_microservices_boilerplate.OrderService.Application.Handlers;
 
 public sealed class ListOrdersHandler : IRequestHandler<ListOrdersQuery, PagedResult<OrderDto>>
 {
-    private readonly OrderViewRepository _repository;
+    private readonly IOrderViewRepository _repository;
     private readonly ILogger<ListOrdersHandler> _logger;
 
-    public ListOrdersHandler(OrderViewRepository repository, ILogger<ListOrdersHandler> logger)
+    public ListOrdersHandler(IOrderViewRepository repository, ILogger<ListOrdersHandler> logger)
     {
         _repository = repository;
         _logger = logger;

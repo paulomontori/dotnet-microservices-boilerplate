@@ -5,9 +5,9 @@ namespace dotnet_microservices_boilerplate.Domain;
 public class OrderService
 {
     private readonly IOrderRepository _repository;
-    private readonly KafkaProducer _producer;
+    private readonly IKafkaProducer _producer;
 
-    public OrderService(IOrderRepository repository, KafkaProducer producer)
+    public OrderService(IOrderRepository repository, IKafkaProducer producer)
     {
         _repository = repository;
         _producer = producer;
