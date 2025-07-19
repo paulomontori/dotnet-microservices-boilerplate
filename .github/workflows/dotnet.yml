@@ -30,7 +30,7 @@ jobs:
         run: dotnet test --no-build --verbosity normal --configuration Release --collect:"XPlat Code Coverage" --logger trx
 
       - name: Generate report
-        run: dotnet $(UserProfile)\.nuget\packages\reportgenerator\5.4.9\tools\net8.0\ReportGenerator.dll -reports:cobertura.xml -targetdir:coveragereport
+        run: dotnet $(UserProfile)\.nuget\packages\reportgenerator\5.4.9\tools\net8.0\ReportGenerator.dll -reports:cobertura.xml -targetdir:coverage-report
 
       - name: Generate coverage summary
         uses: danielpalme/ReportGenerator-GitHub-Action@5.4.9
