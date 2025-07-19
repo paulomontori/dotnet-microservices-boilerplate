@@ -3,16 +3,19 @@ using dotnet_microservices_boilerplate.OrderService.Application.Commands;
 using dotnet_microservices_boilerplate.OrderService.Domain.Brokers;
 using dotnet_microservices_boilerplate.OrderService.Domain.Entities;
 using dotnet_microservices_boilerplate.OrderService.Domain.Events;
+using Microsoft.Extensions.Logging;
 
 namespace dotnet_microservices_boilerplate.OrderService.Application.Handlers;
 
 public sealed class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Guid>
 {
     private readonly IKafkaBroker _kafkaBroker;
+    private readonly ILogger<CreateOrderHandler> _logger;
 
-    public CreateOrderHandler(IKafkaBroker kafkaBroker)
+    public CreateOrderHandler(IKafkaBroker kafkaBroker, ILogger<CreateOrderHandler> logger)
     {
         _kafkaBroker = kafkaBroker;
+        _logger = logger;
     }
 
     public async Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -33,6 +36,7 @@ public sealed class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Gui
         // Publish event to Kafka
         var evt = new OrderCreatedEvent(order.Id, DateTime.UtcNow);
         await _kafkaBroker.ProduceAsync("orders", evt, cancellationToken);
+        _logger.LogInformation("Order {OrderId} created", order.Id);
 
         return order.Id;
     }
