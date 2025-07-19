@@ -46,3 +46,22 @@ The application now uses **Redis** for caching query results. A view database is
 
 ### Observability Layer
 **Serilog** handles structured logging while **OpenTelemetry** collects traces and metrics. Metrics are exposed at `/metrics` for Prometheus and can be visualized in **Grafana**.
+
+## 🚀 Docker & AKS Deployment
+
+To build the container image locally run:
+
+```bash
+docker build -t order-service .
+```
+
+Push the image to your registry (e.g. Azure Container Registry) and update the
+`image` field in `k8s/deployment.yaml` accordingly. Then apply the manifests to
+an AKS cluster:
+
+```bash
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+```
+
+This creates a Deployment and an external Service for the API.

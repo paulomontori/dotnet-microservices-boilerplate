@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+      - name: order-service
+        image: yourregistry/order-service:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:8080"
+        - name: ConnectionStrings__Orders
+          value: "Host=postgres;Database=orders_db;Username=postgres;Password=postgres"
+        - name: ConnectionStrings__Redis
+          value: "redis:6379"
+        - name: Kafka__BootstrapServers
+          value: "kafka:9092"
