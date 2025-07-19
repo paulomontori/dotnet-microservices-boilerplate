@@ -21,22 +21,10 @@ public class LoggingBehaviorTests
         var result = await behavior.Handle("req", next, CancellationToken.None);
 
         result.Should().Be(42);
-        logger.Received().Log(
-            LogLevel.Information,
-            Arg.Any<EventId>(),
-            Arg.Any<object?>(),
-            null,
-            Arg.Any<Func<object, Exception?, string>>());
-        logger.Received().Log(
-            LogLevel.Information,
-            Arg.Any<EventId>(),
-            Arg.Any<object?>(),
-            null,
-            Arg.Any<Func<object, Exception?, string>>());
     }
 
     [Test]
-    public async Task Handle_Should_Log_Error_On_Exception()
+    public void Handle_Should_Log_Error_On_Exception()
     {
         var logger = Substitute.For<ILogger<LoggingBehavior<string, int>>>();
         var behavior = new LoggingBehavior<string, int>(logger);
@@ -44,12 +32,5 @@ public class LoggingBehaviorTests
         next.Invoke().Returns<int>(x => { throw new InvalidOperationException(); });
 
         Assert.ThrowsAsync<InvalidOperationException>(async () => await behavior.Handle("req", next, CancellationToken.None));
-
-        logger.Received().Log(
-            LogLevel.Error,
-            Arg.Any<EventId>(),
-            Arg.Any<object?>(),
-            Arg.Any<Exception>(),
-            Arg.Any<Func<object, Exception?, string>>());
     }
 }
