@@ -6,6 +6,10 @@
     <RootNamespace>dotnet_microservices_boilerplate</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
+</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Confluent.Kafka" Version="2.1.0" />
+  </ItemGroup>
 
 </Project>
