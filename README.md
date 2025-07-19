@@ -22,7 +22,7 @@ A **reference implementation** of a lightweight Order Management System that sho
 | Caching | **Redis** | Read‑model caching, idempotency tokens |
 | Container & Orchestration | **Docker** & **Azure AKS** | Compose for local dev, Helm chart for AKS |
 | Observability | **Serilog**, **OpenTelemetry**, **Prometheus + Grafana** | Structured logs, traces & metrics |
-| Tests | **xUnit**, **FluentAssertions**, **NSubstitute** | Unit, integration & contract tests |
+| Tests | **nUnit**, **FluentAssertions**, **NSubstitute** | Unit, integration & contract tests |
 
 ---
 

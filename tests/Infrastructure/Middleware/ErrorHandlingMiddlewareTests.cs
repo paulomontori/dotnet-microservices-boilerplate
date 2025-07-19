@@ -5,7 +5,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using Xunit;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -13,7 +13,7 @@ using System;
 
 public class ErrorHandlingMiddlewareTests
 {
-    [Fact]
+    [Test]
     public async System.Threading.Tasks.Task Invoke_Should_Return_NotFound_For_KeyNotFoundException()
     {
         var logger = Substitute.For<ILogger<ErrorHandlingMiddleware>>();
@@ -30,7 +30,7 @@ public class ErrorHandlingMiddlewareTests
         body.RootElement.GetProperty("error").GetString().Should().Be("missing");
     }
 
-    [Fact]
+    [Test]
     public async Task Invoke_Should_Return_InternalServerError_For_Exception()
     {
         var logger = Substitute.For<ILogger<ErrorHandlingMiddleware>>();
@@ -47,7 +47,7 @@ public class ErrorHandlingMiddlewareTests
         body.RootElement.GetProperty("error").GetString().Should().NotBeNull();
     }
 
-    [Fact]
+    [Test]
     public async Task Invoke_Should_Pass_Through_When_No_Exception()
     {
         var logger = Substitute.For<ILogger<ErrorHandlingMiddleware>>();

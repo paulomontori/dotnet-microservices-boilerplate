@@ -6,7 +6,7 @@ using PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.ViewData;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using Xunit;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Threading;
@@ -14,7 +14,7 @@ using System;
 
 public class ListOrdersHandlerTests
 {
-    [Fact]
+    [Test]
     public async Task Handle_Should_Return_PagedResult()
     {
         var repo = Substitute.For<IOrderViewRepository>();
