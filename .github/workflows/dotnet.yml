@@ -24,7 +24,7 @@ jobs:
         run: dotnet build --no-restore --configuration Release
 
       - name: Code format check
-        run: dotnet format --no-restore --no-build --verify-no-changes
+        run: dotnet format --no-restore --verify-no-changes
 
       - name: Test with coverage
         run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage" --logger trx
