@@ -29,12 +29,12 @@ jobs:
       - name: Test with coverage
         run: dotnet test --no-build --verbosity normal --configuration Release --collect:"XPlat Code Coverage" --logger trx
         
-      - name: Generate Coverage Report
-        uses: reportgenerator/reportgenerator@v5
+      - name: Generate coverage summary
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.4.9
         with:
           reports: '**/coverage.cobertura.xml'
           targetdir: 'coverage-report'
-          reporttypes: 'Html;Cobertura'
+          reporttypes: 'TextSummary'
           
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
