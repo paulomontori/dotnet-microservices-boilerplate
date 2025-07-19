@@ -20,14 +20,14 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build
-        run: dotnet build --no-restore --configuration Release
-
       - name: Code format check
         run: dotnet format --no-restore --verify-no-changes
+        
+      - name: Build
+        run: dotnet build --no-restore
 
       - name: Test with coverage
-        run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage" --logger trx
+        run: dotnet test --no-build --verbosity normal --configuration Release --collect:"XPlat Code Coverage" --logger trx
 
       - name: Generate coverage summary
         uses: danielpalme/ReportGenerator-GitHub-Action@5.4.9
