@@ -1,6 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
 
 using dotnet_microservices_boilerplate.OrderService.Domain.Brokers;
+using dotnet_microservices_boilerplate.OrderService.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -11,6 +13,12 @@ builder.Services.AddMediatR(cfg =>
 
 var kafkaBootstrap = builder.Configuration.GetValue<string>("Kafka:BootstrapServers") ?? "localhost:9092";
 builder.Services.AddSingleton<IKafkaBroker>(_ => new KafkaBroker(kafkaBootstrap));
+
+var connectionString = builder.Configuration.GetConnectionString("Orders") ??
+                       "Host=localhost;Database=orders_db;Username=postgres;Password=postgres";
+builder.Services.AddDbContext<OrderDbContext>(options =>
+    options.UseNpgsql(connectionString));
+builder.Services.AddScoped<OrderRepository>();
 
 var app = builder.Build();
 
