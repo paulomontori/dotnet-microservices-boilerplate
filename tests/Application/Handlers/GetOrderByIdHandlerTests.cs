@@ -5,7 +5,7 @@ using PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.ViewData;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using Xunit;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using System;
 using System.Threading;
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 public class GetOrderByIdHandlerTests
 {
-    [Fact]
+    [Test]
     public async Task Handle_Should_Return_Dto_When_Order_Found()
     {
         var repo = Substitute.For<IOrderViewRepository>();
@@ -29,7 +29,7 @@ public class GetOrderByIdHandlerTests
         dto.Items.Should().HaveCount(1);
     }
 
-    [Fact]
+    [Test]
     public async Task Handle_Should_Throw_When_Not_Found()
     {
         var repo = Substitute.For<IOrderViewRepository>();
@@ -37,6 +37,6 @@ public class GetOrderByIdHandlerTests
         var handler = new GetOrderByIdHandler(repo, logger);
         repo.GetByIdAsync(Arg.Any<Guid>(), CancellationToken.None).Returns((Order?)null);
 
-        await Assert.ThrowsAsync<KeyNotFoundException>(() => handler.Handle(new GetOrderByIdQuery(Guid.NewGuid()), CancellationToken.None));
+        Assert.ThrowsAsync<KeyNotFoundException>(async () => await handler.Handle(new GetOrderByIdQuery(Guid.NewGuid()), CancellationToken.None));
     }
 }

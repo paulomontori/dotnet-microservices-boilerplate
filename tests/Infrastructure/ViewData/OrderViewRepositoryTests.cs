@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using Xunit;
+using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 
@@ -22,7 +22,7 @@ public class OrderViewRepositoryTests
 
     private static IDistributedCache CreateCache() => new MemoryDistributedCache(Options.Create(new MemoryDistributedCacheOptions()));
 
-    [Fact]
+    [Test]
     public async Task GetByIdAsync_Should_Return_From_Cache()
     {
         var context = CreateContext();
@@ -39,7 +39,7 @@ public class OrderViewRepositoryTests
         second.Should().NotBeNull();
     }
 
-    [Fact]
+    [Test]
     public async Task ListAsync_Should_Return_Orders()
     {
         var context = CreateContext();

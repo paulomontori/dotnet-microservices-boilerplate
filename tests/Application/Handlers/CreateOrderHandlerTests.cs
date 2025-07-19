@@ -5,13 +5,13 @@ using PWorx.MicroserviceBoilerPlate.OrderService.Domain.Events;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using Xunit;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using System.Threading;
 
 public class CreateOrderHandlerTests
 {
-    [Fact]
+    [Test]
     public async Task Handle_Should_Produce_Event_And_Return_Id()
     {
         var broker = Substitute.For<IKafkaBroker>();
