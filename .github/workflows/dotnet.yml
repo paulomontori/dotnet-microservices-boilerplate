@@ -32,7 +32,6 @@ jobs:
       - name: Generate Coverage Report
         uses: reportgenerator/reportgenerator@v5
         with:
-          # o padrão de saída do Coverlet é coverage.cobertura.xml
           reports: '**/coverage.cobertura.xml'
           targetdir: 'coverage-report'
           reporttypes: 'Html;Cobertura'
