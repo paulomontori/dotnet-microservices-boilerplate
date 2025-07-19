@@ -2,7 +2,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 using dotnet_microservices_boilerplate.OrderService.Domain.Brokers;
 using dotnet_microservices_boilerplate.OrderService.Infrastructure.Data;
+using dotnet_microservices_boilerplate.OrderService.Infrastructure.ViewData;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -19,6 +21,9 @@ var connectionString = builder.Configuration.GetConnectionString("Orders") ??
 builder.Services.AddDbContext<OrderDbContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddScoped<OrderRepository>();
+builder.Services.AddStackExchangeRedisCache(options =>
+    options.Configuration = builder.Configuration.GetConnectionString("Redis") ?? "localhost:6379");
+builder.Services.AddScoped<OrderViewRepository>();
 
 var app = builder.Build();
 

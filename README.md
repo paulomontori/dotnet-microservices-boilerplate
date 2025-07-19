@@ -40,3 +40,4 @@ flowchart LR
     end
     Infrastructure -->|EF Core| PostgreSQL[(PostgreSQL)]
     ReadModel --> API
+\n### Caching Layer\nThe application now uses **Redis** for caching query results. A view database is accessed via EF Core to serve read models, and cached entries expire after a short period to keep data fresh.
