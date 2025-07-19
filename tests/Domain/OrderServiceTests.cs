@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using dotnet_microservices_boilerplate.Domain;
+using PWorx.MicroserviceBoilerPlate.Domain;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;

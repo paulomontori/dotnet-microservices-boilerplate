@@ -1,7 +1,7 @@
-using dotnet_microservices_boilerplate.OrderService.Application.Commands;
-using dotnet_microservices_boilerplate.OrderService.Application.Handlers;
-using dotnet_microservices_boilerplate.OrderService.Domain.Brokers;
-using dotnet_microservices_boilerplate.OrderService.Domain.Events;
+using PWorx.MicroserviceBoilerPlate.OrderService.Application.Commands;
+using PWorx.MicroserviceBoilerPlate.OrderService.Application.Handlers;
+using PWorx.MicroserviceBoilerPlate.OrderService.Domain.Brokers;
+using PWorx.MicroserviceBoilerPlate.OrderService.Domain.Events;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;

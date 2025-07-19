@@ -12,6 +12,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\dotnet-microservices-boilerplate.csproj" />
+    <ProjectReference Include="..\src\PWorx.MicroserviceBoilerPlate\PWorx.MicroserviceBoilerPlate.csproj" />
   </ItemGroup>
 </Project>

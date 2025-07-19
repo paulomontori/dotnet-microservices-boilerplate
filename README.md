@@ -1,4 +1,4 @@
-# dotnet‑microservices‑boilerplate
+# PWorx Microservice BoilerPlate
 
 A **reference implementation** of a lightweight Order Management System that showcases:
 
