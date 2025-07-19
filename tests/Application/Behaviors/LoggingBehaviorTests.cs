@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using dotnet_microservices_boilerplate.OrderService.Application.Behaviors;
+using PWorx.MicroserviceBoilerPlate.OrderService.Application.Behaviors;
 using FluentAssertions;
 using MediatR;
 using Microsoft.Extensions.Logging;

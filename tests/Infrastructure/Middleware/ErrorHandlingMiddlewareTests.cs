@@ -1,6 +1,6 @@
 using System.Net;
 using System.Text.Json;
-using dotnet_microservices_boilerplate.OrderService.Infrastructure.Middleware;
+using PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.Middleware;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;

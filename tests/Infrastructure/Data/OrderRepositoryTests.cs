@@ -1,5 +1,5 @@
-using dotnet_microservices_boilerplate.OrderService.Domain.Entities;
-using dotnet_microservices_boilerplate.OrderService.Infrastructure.Data;
+using PWorx.MicroserviceBoilerPlate.OrderService.Domain.Entities;
+using PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.Data;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

@@ -1,8 +1,8 @@
-using dotnet_microservices_boilerplate.OrderService.Application.Dtos;
-using dotnet_microservices_boilerplate.OrderService.Application.Handlers;
-using dotnet_microservices_boilerplate.OrderService.Application.Queries;
-using dotnet_microservices_boilerplate.OrderService.Domain.Entities;
-using dotnet_microservices_boilerplate.OrderService.Infrastructure.ViewData;
+using PWorx.MicroserviceBoilerPlate.OrderService.Application.Dtos;
+using PWorx.MicroserviceBoilerPlate.OrderService.Application.Handlers;
+using PWorx.MicroserviceBoilerPlate.OrderService.Application.Queries;
+using PWorx.MicroserviceBoilerPlate.OrderService.Domain.Entities;
+using PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.ViewData;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
