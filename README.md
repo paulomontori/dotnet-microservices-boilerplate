@@ -48,6 +48,32 @@ The application now uses **Redis** for caching query results. A view database is
 **Serilog** handles structured logging while **OpenTelemetry** collects traces and metrics. Metrics are exposed at `/metrics` for Prometheus and can be visualized in **Grafana**.
 Global exception handling with structured logs is provided via `ErrorHandlingMiddleware`, and MediatR requests are logged through a `LoggingBehavior`.
 
+## 📁 Folder Structure
+
+```
+src/
+  PWorx.MicroserviceBoilerPlate/
+    Domain/                       -- Shared domain services
+    OrderService/
+      API/                        -- Minimal API endpoints
+      Application/                -- CQRS commands, queries and handlers
+      Domain/                     -- Entities and domain events
+      Infrastructure/             -- EF Core data and middleware
+    k8s/                          -- Kubernetes deployment manifests
+tests/
+  Application/                    -- Tests for the application layer
+  Domain/                         -- Tests for domain logic
+  Infrastructure/                 -- Tests for persistence and middleware
+```
+
+The repository separates production code under `src` from test projects in
+`tests`. Inside the microservice project, folders map to the main layers of a
+Domain‑Driven Design architecture: `Domain` contains the core business logic,
+`Application` handles orchestration and MediatR behaviors, `API` exposes the
+HTTP endpoints, and `Infrastructure` isolates data access and cross‑cutting
+concerns. Deployment descriptors live in the `k8s` folder so the service can be
+packaged and deployed alongside the codebase.
+
 ## 📚 Library Choices
 
 The project references a minimal set of NuGet packages to keep the example focused yet realistic:
