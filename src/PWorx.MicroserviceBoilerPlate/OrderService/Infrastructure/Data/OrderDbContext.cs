@@ -3,8 +3,15 @@ using PWorx.MicroserviceBoilerPlate.OrderService.Domain.Entities;
 
 namespace PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.Data;
 
+/// <summary>
+/// Entity Framework Core <see cref="DbContext"/> representing the write database
+/// for the OrderService bounded context.
+/// </summary>
 public sealed class OrderDbContext : DbContext
 {
+    /// <summary>
+    /// Constructs the context with the configured options.
+    /// </summary>
     public OrderDbContext(DbContextOptions<OrderDbContext> options) : base(options)
     {
     }
@@ -12,6 +19,9 @@ public sealed class OrderDbContext : DbContext
     public DbSet<Order> Orders => Set<Order>();
     public DbSet<OrderItem> OrderItems => Set<OrderItem>();
 
+    /// <summary>
+    /// Configures the entity mappings using the Fluent API.
+    /// </summary>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

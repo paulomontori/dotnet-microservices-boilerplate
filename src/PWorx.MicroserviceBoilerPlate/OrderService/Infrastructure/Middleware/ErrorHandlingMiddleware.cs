@@ -12,12 +12,18 @@ public sealed class ErrorHandlingMiddleware
     private readonly RequestDelegate _next;
     private readonly ILogger<ErrorHandlingMiddleware> _logger;
 
+    /// <summary>
+    /// Middleware is constructed with the next delegate in the pipeline and a logger.
+    /// </summary>
     public ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandlingMiddleware> logger)
     {
         _next = next;
         _logger = logger;
     }
 
+    /// <summary>
+    /// Invokes the next middleware and converts thrown exceptions to appropriate HTTP responses.
+    /// </summary>
     public async Task InvokeAsync(HttpContext context)
     {
         try
