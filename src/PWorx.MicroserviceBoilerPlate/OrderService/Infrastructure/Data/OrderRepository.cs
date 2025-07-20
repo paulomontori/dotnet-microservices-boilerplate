@@ -4,17 +4,28 @@ using Microsoft.Extensions.Logging;
 
 namespace PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.Data;
 
+/// <summary>
+/// Concrete repository implementation using Entity Framework Core. The domain
+/// only sees the <c>OrderRepository</c> through the <see cref="OrderDbContext"/>
+/// abstraction.
+/// </summary>
 public sealed class OrderRepository
 {
     private readonly OrderDbContext _dbContext;
     private readonly ILogger<OrderRepository> _logger;
 
+    /// <summary>
+    /// Initializes a new instance of the repository with its dependencies.
+    /// </summary>
     public OrderRepository(OrderDbContext dbContext, ILogger<OrderRepository> logger)
     {
         _dbContext = dbContext;
         _logger = logger;
     }
 
+    /// <summary>
+    /// Adds or updates an order and saves changes to the database.
+    /// </summary>
     public async Task SaveAsync(Order order, CancellationToken cancellationToken = default)
     {
         _logger.LogDebug("Saving order {OrderId}", order.Id);
@@ -40,6 +51,9 @@ public sealed class OrderRepository
         _logger.LogInformation("Order {OrderId} saved", order.Id);
     }
 
+    /// <summary>
+    /// Retrieves an order with its items by identifier.
+    /// </summary>
     public async Task<Order?> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
         _logger.LogDebug("Fetching order {OrderId}", id);

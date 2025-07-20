@@ -6,12 +6,20 @@ using PWorx.MicroserviceBoilerPlate.OrderService.Application.Dtos;
 
 namespace PWorx.MicroserviceBoilerPlate.OrderService.API.Controllers;
 
+/// <summary>
+/// HTTP API controller exposing order commands and queries. It delegates work
+/// to MediatR so that the controller remains thin and free of business logic.
+/// </summary>
 [ApiController]
 [Route("api/v1/orders")]
 public sealed class OrderController : ControllerBase
 {
     private readonly IMediator _mediator;
 
+    /// <summary>
+    /// Constructor receives <see cref="IMediator"/> so that this controller
+    /// simply forwards commands and queries to the application layer.
+    /// </summary>
     public OrderController(IMediator mediator) => _mediator = mediator;
 
     // ----------  QUERIES  ----------

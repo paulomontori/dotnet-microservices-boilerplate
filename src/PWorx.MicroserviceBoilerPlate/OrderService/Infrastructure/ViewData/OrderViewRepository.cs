@@ -6,17 +6,27 @@ using PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.Data;
 
 namespace PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.ViewData;
 
+/// <summary>
+/// Abstraction for querying orders for read-only scenarios.
+/// </summary>
 public interface IOrderViewRepository
 {
     Task<Order?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<Order>> ListAsync(string? status, int page, int pageSize, CancellationToken cancellationToken = default);
 }
 
+/// <summary>
+/// Implementation that uses EF Core for queries and Redis for caching. The
+/// caching strategy is simple to highlight the concept of a read model.
+/// </summary>
 public sealed class OrderViewRepository : IOrderViewRepository
 {
     private readonly OrderDbContext _dbContext;
     private readonly IDistributedCache _cache;
 
+    /// <summary>
+    /// Creates the repository with its dependencies.
+    /// </summary>
     public OrderViewRepository(OrderDbContext dbContext, IDistributedCache cache)
     {
         _dbContext = dbContext;
@@ -25,6 +35,9 @@ public sealed class OrderViewRepository : IOrderViewRepository
 
     private static string CacheKey(Guid id) => $"order:{id}";
 
+    /// <summary>
+    /// Retrieves an order and caches the result for a short period.
+    /// </summary>
     public async Task<Order?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var key = CacheKey(id);
@@ -51,6 +64,10 @@ public sealed class OrderViewRepository : IOrderViewRepository
         return order;
     }
 
+    /// <summary>
+    /// Returns a paged list of orders optionally filtered by status and caches
+    /// the result.
+    /// </summary>
     public async Task<IReadOnlyList<Order>> ListAsync(string? status, int page, int pageSize, CancellationToken cancellationToken = default)
     {
         var key = $"orders:{status}:{page}:{pageSize}";

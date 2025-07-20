@@ -1,3 +1,5 @@
+// Composition root configuring the web host, dependencies and middleware. This
+// keeps startup configuration separate from the rest of the application code.
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 using OpenTelemetry.Resources;

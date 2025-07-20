@@ -48,6 +48,21 @@ The application now uses **Redis** for caching query results. A view database is
 **Serilog** handles structured logging while **OpenTelemetry** collects traces and metrics. Metrics are exposed at `/metrics` for Prometheus and can be visualized in **Grafana**.
 Global exception handling with structured logs is provided via `ErrorHandlingMiddleware`, and MediatR requests are logged through a `LoggingBehavior`.
 
+## 📚 Library Choices
+
+The project references a minimal set of NuGet packages to keep the example focused yet realistic:
+
+| Package | Reason |
+|---------|-------|
+| **MediatR** | Implements the mediator pattern to decouple controllers from business logic and enable the CQRS style. |
+| **Microsoft.AspNetCore.OpenApi** | Provides the `AddOpenApi` helpers that quickly enable Swagger documentation. |
+| **Confluent.Kafka** | Lightweight Kafka client used by the domain to publish events without pulling in an entire messaging framework. |
+| **Microsoft.EntityFrameworkCore** + **Npgsql.EntityFrameworkCore.PostgreSQL** | Gives a modern ORM for the write model backed by PostgreSQL. |
+| **Microsoft.Extensions.Caching.StackExchangeRedis** | Adds Redis caching to support the read model repository. |
+| **OpenTelemetry** packages | Collect traces and metrics so the service can be observed in production environments. |
+| **Serilog.AspNetCore** + **Serilog.Sinks.Console** | Structured logging configured in <code>Program.cs</code> with console output for local development. |
+
+
 ## 🚀 Docker & AKS Deployment
 
 To build the container image locally run:
