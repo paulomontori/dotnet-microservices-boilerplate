@@ -48,6 +48,19 @@ The application now uses **Redis** for caching query results. A view database is
 **Serilog** handles structured logging while **OpenTelemetry** collects traces and metrics. Metrics are exposed at `/metrics` for Prometheus and can be visualized in **Grafana**.
 Global exception handling with structured logs is provided via `ErrorHandlingMiddleware`, and MediatR requests are logged through a `LoggingBehavior`.
 
+## 📝 Architecture Decisions
+
+The boilerplate is intentionally opinionated to keep the example small yet realistic. Key design choices include:
+
+* **Bounded Context per Service** – the repository focuses on an `OrderService` microservice to illustrate a DDD approach where each context owns its domain model.
+* **Minimal API Controllers** – endpoints only route HTTP requests and forward them to the application layer. Business logic lives in MediatR handlers to keep controllers lightweight.
+* **CQRS with MediatR** – commands mutate state while queries load read models. This separation clarifies intent and enables cross-cutting behaviors through pipeline modules.
+* **EF Core Write Model** – relational persistence is handled via Entity Framework Core with a dedicated `OrderDbContext` and repository. Migrations are code-first for simplicity.
+* **Redis-backed View Repository** – read operations go through an `OrderViewRepository` that combines EF Core queries with Redis caching to demonstrate a simple read model pattern.
+* **Kafka Domain Events** – important domain events are published to Kafka using a small `KafkaBroker` abstraction so other services can react asynchronously.
+* **Observability by Default** – Serilog and OpenTelemetry are integrated from the start with Prometheus scraping enabled at `/metrics`.
+* **Docker and Kubernetes** – a Dockerfile and `k8s` manifests are provided to run the service in containers and deploy to Azure AKS.
+
 ## 📁 Folder Structure
 
 ```
