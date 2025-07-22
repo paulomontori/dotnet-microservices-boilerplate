@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using PWorx.MicroserviceBoilerPlate.OrderService.Application.Commands;
 using PWorx.MicroserviceBoilerPlate.OrderService.Application.Queries;
 using PWorx.MicroserviceBoilerPlate.OrderService.Application.Dtos;
@@ -12,6 +13,7 @@ namespace PWorx.MicroserviceBoilerPlate.OrderService.API.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/v1/orders")]
+[Authorize]
 public sealed class OrderController : ControllerBase
 {
     private readonly IMediator _mediator;

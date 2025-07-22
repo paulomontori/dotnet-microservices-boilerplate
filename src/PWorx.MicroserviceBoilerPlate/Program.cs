@@ -5,6 +5,7 @@ using OpenTelemetry.Trace;
 using OpenTelemetry.Resources;
 using Serilog;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using PWorx.MicroserviceBoilerPlate.OrderService.Domain.Brokers;
 using PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.Data;
 using PWorx.MicroserviceBoilerPlate.OrderService.Infrastructure.ViewData;
@@ -25,6 +26,13 @@ builder.Host.UseSerilog((context, services, configuration) =>
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}";
+        options.Audience = builder.Configuration["Auth0:Audience"];
+    });
+builder.Services.AddAuthorization();
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblyContaining<PWorx.MicroserviceBoilerPlate.OrderService.Application.Commands.CreateOrderCommand>());
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PWorx.MicroserviceBoilerPlate.OrderService.Application.Behaviors.LoggingBehavior<,>));
@@ -61,6 +69,8 @@ builder.Services.AddOpenTelemetry()
 var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.MapPrometheusScrapingEndpoint();
 

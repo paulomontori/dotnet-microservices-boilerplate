@@ -20,6 +20,7 @@ A **reference implementation** of a lightweight Order Management System that sho
 | Persistence | **PostgreSQL** + **EF Core** | DbContext per Bounded Context, Code‑First Migrations |
 | Messaging (async) | **Kafka** (via Confluent.Kafka) | Event publishing for Order domain events |
 | Caching | **Redis** | Read‑model caching, idempotency tokens |
+| Authentication | **Auth0 JWT Bearer** | Secure endpoints with tokens |
 | Container & Orchestration | **Docker** & **Azure AKS** | Compose for local dev, Helm chart for AKS |
 | Observability | **Serilog**, **OpenTelemetry**, **Prometheus + Grafana** | Structured logs, traces & metrics |
 | Tests | **nUnit**, **FluentAssertions**, **NSubstitute** | Unit, integration & contract tests |
@@ -98,6 +99,7 @@ The project references a minimal set of NuGet packages to keep the example focus
 | **Confluent.Kafka** | Lightweight Kafka client used by the domain to publish events without pulling in an entire messaging framework. |
 | **Microsoft.EntityFrameworkCore** + **Npgsql.EntityFrameworkCore.PostgreSQL** | Gives a modern ORM for the write model backed by PostgreSQL. |
 | **Microsoft.Extensions.Caching.StackExchangeRedis** | Adds Redis caching to support the read model repository. |
+| **Microsoft.AspNetCore.Authentication.JwtBearer** | Adds JWT Bearer authentication integrated with Auth0. |
 | **OpenTelemetry** packages | Collect traces and metrics so the service can be observed in production environments. |
 | **Serilog.AspNetCore** + **Serilog.Sinks.Console** | Structured logging configured in <code>Program.cs</code> with console output for local development. |
 
