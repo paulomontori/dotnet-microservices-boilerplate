@@ -26,3 +26,7 @@ spec:
           value: "redis:6379"
         - name: Kafka__BootstrapServers
           value: "kafka:9092"
+        - name: Auth0__Domain
+          value: "your-tenant.us.auth0.com"
+        - name: Auth0__Audience
+          value: "https://your-api-audience"
